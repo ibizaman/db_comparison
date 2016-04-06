@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head><title>Runs</title></head>
+<h1>Select a run to see more information</h1>
+{% if not runs %}
+    <p>No run yet, go create one!</p>
+{% else %}
+    <table>
+        <tr>
+        {% for column in columns %}
+            <th>{{ column }}</th>
+        {% endfor %}
+        </tr>
+    {% for run in runs %}
+        <tr>
+        {% for column in columns %}
+            {% if loop.first %}
+                <th><a href=/run/{{ run[column] }}>{{ run[column] }}</a></th>
+            {% else %}
+                <th>{{ run[column] }}</th>
+            {% endif %}
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}

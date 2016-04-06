@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard - run {{ run }}</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js"></script>
+    </head>
+    <body>
+        <h1>Dashboard - run {{ run }}</h1>
+        {% for graph in graphs %}
+            <div id="{{ graph.group }}-{{ graph.subgroup }}"></div>
+        {% endfor %}
+
+        <script src='/static/js/graphs.js' type='text/javascript'></script>
+        <script type="text/javascript">
+            get_json("/monitors_json/{{ run }}", function(error, data) {
+                if (error != null) {
+                    return;
+                }
+                make_graphs(data);
+            });
+        </script>
+    </body>
+</html>
+

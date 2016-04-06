@@ -12,3 +12,12 @@ python3 db_comparison postgres create_table
 ```
 
 For now, only PostgreSQL is supported.
+
+
+Show values in an html page
+---------------------------
+
+```
+python3 db_comparison server --port 9999
+```
+

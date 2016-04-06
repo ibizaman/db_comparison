@@ -18,6 +18,10 @@ def main():
         action_parser = subparsers.add_parser(name, help=doc, description=doc)
         action_config.add_subparser(action_parser)
 
+    server_parser = subparsers.add_parser('server', help='Start result server', description='Start result server')
+    server_parser.add_argument('--port', type=int, required=False, default=5000)
+    server_parser.set_defaults(func=result_server.start)
+
     args = vars(parser.parse_args())
     func = args.pop('func')
     func(**args)
