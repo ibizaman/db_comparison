@@ -5,6 +5,7 @@ import argparse
 import postgres
 from monitor import MonitorAction
 import result_server
+import setup_result_db
 
 
 ACTIONS = [cls for cls in vars()['MonitorAction'].__subclasses__()]
@@ -21,6 +22,9 @@ def main():
     server_parser = subparsers.add_parser('server', help='Start result server', description='Start result server')
     server_parser.add_argument('--port', type=int, required=False, default=5000)
     server_parser.set_defaults(func=result_server.start)
+
+    server_parser = subparsers.add_parser('init', help='Setup result database', description='Setup result database')
+    server_parser.set_defaults(func=setup_result_db.run)
 
     args = vars(parser.parse_args())
     func = args.pop('func')
